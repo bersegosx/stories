@@ -6,38 +6,38 @@ from stories import Success
 
 
 class NormalMethod(object):
-    def one(self, ctx):
+    def a1s1(self, ctx):
         return Success()
 
 
 class StringMethod(object):
-    def one(self, ctx):
-        ctx.foo = "1"
-        ctx.bar = ["2"]
+    def a1s1(self, ctx):
+        ctx.a1v1 = "1"
+        ctx.a1v2 = ["2"]
         return Success()
 
 
 class WrongMethod(object):
-    def one(self, ctx):
-        ctx.foo = "<boom>"
+    def a1s1(self, ctx):
+        ctx.a1v1 = "<boom>"
 
 
 class UnknownMethod(object):
-    def one(self, ctx):
+    def a1s1(self, ctx):
         ctx.spam = "0"
 
 
 class ExceptionMethod(object):
-    def one(self, ctx):
+    def a1s1(self, ctx):
         raise Exception
 
 
 class AliasMethod(object):
-    def one(self, ctx):
+    def a1s1(self, ctx):
         value = {"key": "1"}
-        ctx.foo = value
-        ctx.bar = value
-        ctx.baz = value
+        ctx.a1v1 = value
+        ctx.a1v2 = value
+        ctx.a1v3 = value
         return Success()
 
 
@@ -45,7 +45,7 @@ class AliasMethod(object):
 
 
 class NormalNextMethod(object):
-    def two(self, ctx):
+    def a2s1(self, ctx):
         return Success()
 
 
@@ -53,28 +53,28 @@ class NormalNextMethod(object):
 
 
 class NormalParentMethod(object):
-    def before(self, ctx):
+    def b1s1(self, ctx):
         return Success()
 
-    def after(self, ctx):
+    def b1s2(self, ctx):
         return Success()
 
 
 class StringParentMethod(object):
-    def before(self, ctx):
-        ctx.foo = "1"
-        ctx.bar = ["2"]
+    def b1s1(self, ctx):
+        ctx.a1v1 = "1"
+        ctx.a1v2 = ["2"]
         return Success()
 
-    def after(self, ctx):
+    def b1s2(self, ctx):
         return Success()
 
 
 class ExceptionParentMethod(object):
-    def before(self, ctx):
+    def b1s1(self, ctx):
         raise Exception
 
-    def after(self, ctx):
+    def b1s2(self, ctx):
         return Success()
 
 
@@ -82,37 +82,37 @@ class ExceptionParentMethod(object):
 
 
 class NormalRootMethod(object):
-    def start(self, ctx):
+    def c1s1(self, ctx):
         return Success()
 
-    def finish(self, ctx):
+    def c1s2(self, ctx):
         return Success()
 
 
 class StringRootMethod(object):
-    def start(self, ctx):
-        ctx.foo = "1"
-        ctx.bar = ["2"]
+    def c1s1(self, ctx):
+        ctx.a1v1 = "1"
+        ctx.a1v2 = ["2"]
         return Success()
 
-    def finish(self, ctx):
+    def c1s2(self, ctx):
         return Success()
 
 
 class StringWideRootMethod(object):
-    def start(self, ctx):
-        ctx.foo = "1"
-        ctx.bar = ["2"]
-        ctx.baz = "1"
+    def c1s1(self, ctx):
+        ctx.a1v1 = "1"
+        ctx.a1v2 = ["2"]
+        ctx.a1v3 = "1"
         return Success()
 
-    def finish(self, ctx):
+    def c1s2(self, ctx):
         return Success()
 
 
 class ExceptionRootMethod(object):
-    def start(self, ctx):
+    def c1s1(self, ctx):
         raise Exception
 
-    def finish(self, ctx):
+    def c1s2(self, ctx):
         return Success()

@@ -30,15 +30,15 @@ representations = {
 
 class Child(object):
     @story
-    def x(I):
-        I.one
+    def a1(I):
+        I.a1s1
 
-    x.contract(
+    a1.contract(
         Validator(
             {
-                "foo": {"type": "integer", "coerce": int},
-                "bar": {"type": "list", "schema": {"type": "integer", "coerce": int}},
-                "baz": {"type": "integer", "coerce": int},
+                "a1v1": {"type": "integer", "coerce": int},
+                "a1v2": {"type": "list", "schema": {"type": "integer", "coerce": int}},
+                "a1v3": {"type": "integer", "coerce": int},
             }
         )
     )
@@ -46,29 +46,29 @@ class Child(object):
 
 class ChildWithNull(object):
     @story
-    def x(I):
-        I.one
+    def a1(I):
+        I.a1s1
 
 
 class ChildWithShrink(object):
     @story
-    def x(I):
-        I.one
+    def a1(I):
+        I.a1s1
 
-    x.contract(Validator({"baz": {"type": "integer", "coerce": int}}))
+    a1.contract(Validator({"a1v3": {"type": "integer", "coerce": int}}))
 
 
 class ChildAlias(object):
     @story
-    def x(I):
-        I.one
+    def a1(I):
+        I.a1s1
 
-    x.contract(
+    a1.contract(
         Validator(
             {
-                "foo": {"type": "dict", "schema": {"key": {"type": "string"}}},
-                "bar": {"type": "dict", "schema": {"key": {"type": "string"}}},
-                "baz": {
+                "a1v1": {"type": "dict", "schema": {"key": {"type": "string"}}},
+                "a1v2": {"type": "dict", "schema": {"key": {"type": "string"}}},
+                "a1v3": {
                     "type": "dict",
                     "schema": {"key": {"type": "integer", "coerce": int}},
                 },
@@ -79,16 +79,16 @@ class ChildAlias(object):
 
 class ParamChild(object):
     @story
-    @arguments("foo", "bar")
-    def x(I):
-        I.one
+    @arguments("a1v1", "a1v2")
+    def a1(I):
+        I.a1s1
 
-    x.contract(
+    a1.contract(
         Validator(
             {
-                "foo": {"type": "integer", "coerce": int},
-                "bar": {"type": "list", "schema": {"type": "integer", "coerce": int}},
-                "baz": {"type": "integer", "coerce": int},
+                "a1v1": {"type": "integer", "coerce": int},
+                "a1v2": {"type": "list", "schema": {"type": "integer", "coerce": int}},
+                "a1v3": {"type": "integer", "coerce": int},
             }
         )
     )
@@ -96,32 +96,32 @@ class ParamChild(object):
 
 class ParamChildWithNull(object):
     @story
-    @arguments("foo", "bar")
-    def x(I):
-        I.one
+    @arguments("a1v1", "a1v2")
+    def a1(I):
+        I.a1s1
 
 
 class ParamChildWithShrink(object):
     @story
-    @arguments("foo", "bar", "baz")
-    def x(I):
-        I.one
+    @arguments("a1v1", "a1v2", "a1v3")
+    def a1(I):
+        I.a1s1
 
-    x.contract(Validator({"baz": {"type": "integer", "coerce": int}}))
+    a1.contract(Validator({"a1v3": {"type": "integer", "coerce": int}}))
 
 
 class ParamChildAlias(object):
     @story
-    @arguments("foo", "bar", "baz")
-    def x(I):
-        I.one
+    @arguments("a1v1", "a1v2", "a1v3")
+    def a1(I):
+        I.a1s1
 
-    x.contract(
+    a1.contract(
         Validator(
             {
-                "foo": {"type": "dict", "schema": {"key": {"type": "string"}}},
-                "bar": {"type": "dict", "schema": {"key": {"type": "string"}}},
-                "baz": {
+                "a1v1": {"type": "dict", "schema": {"key": {"type": "string"}}},
+                "a1v2": {"type": "dict", "schema": {"key": {"type": "string"}}},
+                "a1v3": {
                     "type": "dict",
                     "schema": {"key": {"type": "integer", "coerce": int}},
                 },
@@ -135,15 +135,15 @@ class ParamChildAlias(object):
 
 class NextChildWithSame(object):
     @story
-    def y(I):
-        I.one
+    def a2(I):
+        I.a1s1
 
-    y.contract(
+    a2.contract(
         Validator(
             {
-                "foo": {"type": "integer", "coerce": int},
-                "bar": {"type": "list", "schema": {"type": "integer", "coerce": int}},
-                "baz": {"type": "integer", "coerce": int},
+                "a1v1": {"type": "integer", "coerce": int},
+                "a1v2": {"type": "list", "schema": {"type": "integer", "coerce": int}},
+                "a1v3": {"type": "integer", "coerce": int},
             }
         )
     )
@@ -151,15 +151,15 @@ class NextChildWithSame(object):
 
 class NextParamChildWithString(object):
     @story
-    @arguments("foo", "bar")
-    def y(I):
-        I.two
+    @arguments("a1v1", "a1v2")
+    def a2(I):
+        I.a2s1
 
-    y.contract(
+    a2.contract(
         Validator(
             {
-                "foo": {"type": "string"},
-                "bar": {"type": "list", "schema": {"type": "string"}},
+                "a1v1": {"type": "string"},
+                "a1v2": {"type": "list", "schema": {"type": "string"}},
             }
         )
     )
@@ -170,18 +170,18 @@ class NextParamChildWithString(object):
 
 class Parent(object):
     @story
-    def a(I):
-        I.before
-        I.x
-        I.after
+    def b1(I):
+        I.b1s1
+        I.a1
+        I.b1s2
 
 
-Parent.a.contract(
+Parent.b1.contract(
     Validator(
         {
-            "ham": {"type": "integer", "coerce": int},
-            "eggs": {"type": "integer", "coerce": int},
-            "beans": {"type": "integer", "coerce": int},
+            "b1v1": {"type": "integer", "coerce": int},
+            "b1v2": {"type": "integer", "coerce": int},
+            "b1v3": {"type": "integer", "coerce": int},
         }
     )
 )
@@ -189,26 +189,26 @@ Parent.a.contract(
 
 class ParentWithNull(object):
     @story
-    def a(I):
-        I.before
-        I.x
-        I.after
+    def b1(I):
+        I.b1s1
+        I.a1
+        I.b1s2
 
 
 class ParentWithSame(object):
     @story
-    def a(I):
-        I.before
-        I.x
-        I.after
+    def b1(I):
+        I.b1s1
+        I.a1
+        I.b1s2
 
 
-ParentWithSame.a.contract(
+ParentWithSame.b1.contract(
     Validator(
         {
-            "foo": {"type": "integer", "coerce": int},
-            "bar": {"type": "list", "schema": {"type": "integer", "coerce": int}},
-            "baz": {"type": "integer", "coerce": int},
+            "a1v1": {"type": "integer", "coerce": int},
+            "a1v2": {"type": "list", "schema": {"type": "integer", "coerce": int}},
+            "a1v3": {"type": "integer", "coerce": int},
         }
     )
 )
@@ -216,30 +216,30 @@ ParentWithSame.a.contract(
 
 class SequentialParent(object):
     @story
-    def a(I):
-        I.before
-        I.x
-        I.y
-        I.after
+    def b1(I):
+        I.b1s1
+        I.a1
+        I.a2
+        I.b1s2
 
-    a.contract(Validator({}))
+    b1.contract(Validator({}))
 
 
 class ParamParent(object):
     @story
-    @arguments("ham", "eggs")
-    def a(I):
-        I.before
-        I.x
-        I.after
+    @arguments("b1v1", "b1v2")
+    def b1(I):
+        I.b1s1
+        I.a1
+        I.b1s2
 
 
-ParamParent.a.contract(
+ParamParent.b1.contract(
     Validator(
         {
-            "ham": {"type": "integer", "coerce": int},
-            "eggs": {"type": "integer", "coerce": int},
-            "beans": {"type": "integer", "coerce": int},
+            "b1v1": {"type": "integer", "coerce": int},
+            "b1v2": {"type": "integer", "coerce": int},
+            "b1v3": {"type": "integer", "coerce": int},
         }
     )
 )
@@ -247,27 +247,27 @@ ParamParent.a.contract(
 
 class ParamParentWithNull(object):
     @story
-    @arguments("ham", "eggs")
-    def a(I):
-        I.before
-        I.x
-        I.after
+    @arguments("b1v1", "b1v2")
+    def b1(I):
+        I.b1s1
+        I.a1
+        I.b1s2
 
 
 class ParamParentWithSame(object):
     @story
-    @arguments("foo", "bar", "baz")
-    def a(I):
-        I.before
-        I.after
+    @arguments("a1v1", "a1v2", "a1v3")
+    def b1(I):
+        I.b1s1
+        I.b1s2
 
 
-ParamParentWithSame.a.contract(
+ParamParentWithSame.b1.contract(
     Validator(
         {
-            "foo": {"type": "integer", "coerce": int},
-            "bar": {"type": "list", "schema": {"type": "integer", "coerce": int}},
-            "baz": {"type": "integer", "coerce": int},
+            "a1v1": {"type": "integer", "coerce": int},
+            "a1v2": {"type": "list", "schema": {"type": "integer", "coerce": int}},
+            "a1v3": {"type": "integer", "coerce": int},
         }
     )
 )
@@ -275,18 +275,18 @@ ParamParentWithSame.a.contract(
 
 class ParamParentWithSameWithString(object):
     @story
-    @arguments("foo", "bar")
-    def a(I):
-        I.before
-        I.x
-        I.after
+    @arguments("a1v1", "a1v2")
+    def b1(I):
+        I.b1s1
+        I.a1
+        I.b1s2
 
 
-ParamParentWithSameWithString.a.contract(
+ParamParentWithSameWithString.b1.contract(
     Validator(
         {
-            "foo": {"type": "string"},
-            "bar": {"type": "list", "schema": {"type": "string"}},
+            "a1v1": {"type": "string"},
+            "a1v2": {"type": "list", "schema": {"type": "string"}},
         }
     )
 )
@@ -297,17 +297,17 @@ ParamParentWithSameWithString.a.contract(
 
 class Root(object):
     @story
-    def i(I):
-        I.start
-        I.a
-        I.finish
+    def c1(I):
+        I.c1s1
+        I.b1
+        I.c1s2
 
 
-Root.i.contract(
+Root.c1.contract(
     Validator(
         {
-            "fizz": {"type": "integer", "coerce": int},
-            "buzz": {"type": "integer", "coerce": int},
+            "c1v1": {"type": "integer", "coerce": int},
+            "c1v2": {"type": "integer", "coerce": int},
         }
     )
 )
@@ -315,18 +315,18 @@ Root.i.contract(
 
 class RootWithSame(object):
     @story
-    def i(I):
-        I.start
-        I.a
-        I.finish
+    def c1(I):
+        I.c1s1
+        I.b1
+        I.c1s2
 
 
-RootWithSame.i.contract(
+RootWithSame.c1.contract(
     Validator(
         {
-            "foo": {"type": "integer", "coerce": int},
-            "bar": {"type": "list", "schema": {"type": "integer", "coerce": int}},
-            "baz": {"type": "integer", "coerce": int},
+            "a1v1": {"type": "integer", "coerce": int},
+            "a1v2": {"type": "list", "schema": {"type": "integer", "coerce": int}},
+            "a1v3": {"type": "integer", "coerce": int},
         }
     )
 )
@@ -334,18 +334,18 @@ RootWithSame.i.contract(
 
 class SequentialRoot(object):
     @story
-    def i(I):
-        I.start
-        I.a
-        I.b
-        I.finish
+    def c1(I):
+        I.c1s1
+        I.b1
+        I.b2
+        I.c1s2
 
 
-SequentialRoot.i.contract(
+SequentialRoot.c1.contract(
     Validator(
         {
-            "fizz": {"type": "integer", "coerce": int},
-            "buzz": {"type": "integer", "coerce": int},
+            "c1v1": {"type": "integer", "coerce": int},
+            "c1v2": {"type": "integer", "coerce": int},
         }
     )
 )
@@ -353,18 +353,18 @@ SequentialRoot.i.contract(
 
 class ParamRoot(object):
     @story
-    @arguments("fizz")
-    def i(I):
-        I.start
-        I.a
-        I.finish
+    @arguments("c1v1")
+    def c1(I):
+        I.c1s1
+        I.b1
+        I.c1s2
 
 
-ParamRoot.i.contract(
+ParamRoot.c1.contract(
     Validator(
         {
-            "fizz": {"type": "integer", "coerce": int},
-            "buzz": {"type": "integer", "coerce": int},
+            "c1v1": {"type": "integer", "coerce": int},
+            "c1v2": {"type": "integer", "coerce": int},
         }
     )
 )

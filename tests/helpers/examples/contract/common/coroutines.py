@@ -6,38 +6,38 @@ from stories import Success
 
 
 class NormalMethod(object):
-    async def one(self, ctx):
+    async def a1s1(self, ctx):
         return Success()
 
 
 class StringMethod(object):
-    async def one(self, ctx):
-        ctx.foo = "1"
-        ctx.bar = ["2"]
+    async def a1s1(self, ctx):
+        ctx.a1v1 = "1"
+        ctx.a1v2 = ["2"]
         return Success()
 
 
 class WrongMethod(object):
-    async def one(self, ctx):
-        ctx.foo = "<boom>"
+    async def a1s1(self, ctx):
+        ctx.a1v1 = "<boom>"
 
 
 class UnknownMethod(object):
-    async def one(self, ctx):
+    async def a1s1(self, ctx):
         ctx.spam = "0"
 
 
 class ExceptionMethod(object):
-    async def one(self, ctx):
+    async def a1s1(self, ctx):
         raise Exception
 
 
 class AliasMethod(object):
-    async def one(self, ctx):
+    async def a1s1(self, ctx):
         value = {"key": "1"}
-        ctx.foo = value
-        ctx.bar = value
-        ctx.baz = value
+        ctx.a1v1 = value
+        ctx.a1v2 = value
+        ctx.a1v3 = value
         return Success()
 
 
@@ -45,7 +45,7 @@ class AliasMethod(object):
 
 
 class NormalNextMethod(object):
-    async def two(self, ctx):
+    async def a2s1(self, ctx):
         return Success()
 
 
@@ -53,28 +53,28 @@ class NormalNextMethod(object):
 
 
 class NormalParentMethod(object):
-    async def before(self, ctx):
+    async def b1s1(self, ctx):
         return Success()
 
-    async def after(self, ctx):
+    async def b1s2(self, ctx):
         return Success()
 
 
 class StringParentMethod(object):
-    async def before(self, ctx):
-        ctx.foo = "1"
-        ctx.bar = ["2"]
+    async def b1s1(self, ctx):
+        ctx.a1v1 = "1"
+        ctx.a1v2 = ["2"]
         return Success()
 
-    async def after(self, ctx):
+    async def b1s2(self, ctx):
         return Success()
 
 
 class ExceptionParentMethod(object):
-    async def before(self, ctx):
+    async def b1s1(self, ctx):
         raise Exception
 
-    async def after(self, ctx):
+    async def b1s2(self, ctx):
         return Success()
 
 
@@ -82,37 +82,37 @@ class ExceptionParentMethod(object):
 
 
 class NormalRootMethod(object):
-    async def start(self, ctx):
+    async def c1s1(self, ctx):
         return Success()
 
-    async def finish(self, ctx):
+    async def c1s2(self, ctx):
         return Success()
 
 
 class StringRootMethod(object):
-    async def start(self, ctx):
-        ctx.foo = "1"
-        ctx.bar = ["2"]
+    async def c1s1(self, ctx):
+        ctx.a1v1 = "1"
+        ctx.a1v2 = ["2"]
         return Success()
 
-    async def finish(self, ctx):
+    async def c1s2(self, ctx):
         return Success()
 
 
 class StringWideRootMethod(object):
-    async def start(self, ctx):
-        ctx.foo = "1"
-        ctx.bar = ["2"]
-        ctx.baz = "1"
+    async def c1s1(self, ctx):
+        ctx.a1v1 = "1"
+        ctx.a1v2 = ["2"]
+        ctx.a1v3 = "1"
         return Success()
 
-    async def finish(self, ctx):
+    async def c1s2(self, ctx):
         return Success()
 
 
 class ExceptionRootMethod(object):
-    async def start(self, ctx):
+    async def c1s1(self, ctx):
         raise Exception
 
-    async def finish(self, ctx):
+    async def c1s2(self, ctx):
         return Success()
